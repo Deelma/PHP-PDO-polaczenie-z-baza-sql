@@ -34,11 +34,7 @@ echo '<tr><th>Marka</th><th>Model</th></tr>';
 
 // ? While'm
 
-$rekordy = 0;
-
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-
-    $rekordy += 1;
 
     echo '<tr><td>' . $row['marka'] . '</td><td>' . $row['model'] . '</td></tr>';
 
@@ -46,6 +42,10 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
 echo "</table><br>";
 
-echo "W bazie jest tyle telefonów: " . $rekordy;
+$stmt = $PDO->prepare('SELECT COUNT(*) FROM telefon');
+
+$stmt->execute();
+
+echo "W bazie jest tyle telefonów: " . $stmt->fetch()[0];
 
 ?>
